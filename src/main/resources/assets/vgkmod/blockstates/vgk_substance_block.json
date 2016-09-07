@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "vgkmod:vgk_substance_block_model" }
+    }
+}

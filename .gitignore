@@ -1,0 +1,10 @@
+.classpath
+.gitignore.swp
+.project
+.settings/
+bin/
+build/
+.gradle/
+run/
+vgk-mod_Client.launch
+vgk-mod_Server.launch
