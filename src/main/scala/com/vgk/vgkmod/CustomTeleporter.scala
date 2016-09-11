@@ -1,4 +1,4 @@
-package com.vgk.vgkmod;
+package com.vgk.vgkmod
 import net.minecraft.world.{WorldServer, Teleporter}
 import net.minecraft.entity.Entity
 
