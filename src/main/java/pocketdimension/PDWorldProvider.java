@@ -1,4 +1,4 @@
-package com.vgk.vgkmod;
+package pocketdimension;
 
 import javax.annotation.Nonnull;
 
@@ -6,7 +6,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
 
-public class PocketDimensionWorldProvider extends WorldProvider {
+public class PDWorldProvider extends WorldProvider {
 	
 	public static int dimensionID = 71727;
 
@@ -17,13 +17,13 @@ public class PocketDimensionWorldProvider extends WorldProvider {
 	
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new PocketChunkGenerator(worldObj);
+		return new PDChunkGenerator(worldObj);
 	}
 	
     @Override
     @Nonnull
     public String getSaveFolder() {
-        return "ELDIM_FIRE";
+        return "DIM_POCKET_DIMENSION";
     }
 
     @Override
@@ -35,15 +35,6 @@ public class PocketDimensionWorldProvider extends WorldProvider {
     public void calculateInitialWeather() {
     	this.worldObj.weatherEffects.clear();
     	this.worldObj.updateWeatherBody();
-    }
-    
-    @Override
-    protected void generateLightBrightnessTable() {
-		float f = 0.3f;
-		for(int i = 0; i <= 15; ++i) {
-			float f1 = 1.0F - (float) i / 15.0F;
-			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
-		}
-    }
+    }    
 
 }

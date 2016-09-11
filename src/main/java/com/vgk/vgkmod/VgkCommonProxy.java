@@ -5,6 +5,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import pocketdimension.PDWorldProvider;
 
 public abstract class VgkCommonProxy {
     
@@ -29,7 +30,7 @@ public abstract class VgkCommonProxy {
 	}
 	
 	private void loadDimension(){
-		DimensionType dimType = DimensionType.register("Pocket Dimension", "pocket-dimension", PocketDimensionWorldProvider.dimensionID, PocketDimensionWorldProvider.class, false);
-        DimensionManager.registerDimension(PocketDimensionWorldProvider.dimensionID, dimType);
+		DimensionType dimType = DimensionType.register("Pocket Dimension", "pocket-dimension", PDWorldProvider.dimensionID, PDWorldProvider.class, false);
+        DimensionManager.registerDimension(PDWorldProvider.dimensionID, dimType);
 	}
 }

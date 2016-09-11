@@ -1,7 +1,6 @@
-package com.vgk.vgkmod;
+package pocketdimension;
 
 import java.util.List;
-import java.util.Random;
 
 import com.google.common.collect.ImmutableList;
 
@@ -16,29 +15,19 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 
-public class PocketChunkGenerator implements IChunkGenerator {
+public class PDChunkGenerator implements IChunkGenerator {
 	
 	private final World worldObj;
-	private final Random random;
-	private final PocketTerrainGenerator terrainGen = new PocketTerrainGenerator();
 	
-	public PocketChunkGenerator(World worldObj) {
+	public PDChunkGenerator(World worldObj) {
 		this.worldObj = worldObj;
-		long seed = 0x1fff;
-		this.random = new Random((seed + 314) * 516);
-		this.terrainGen.setup(worldObj, this.random, Blocks.NETHERRACK.getDefaultState(), Biomes.PLAINS);
 	}
 
 	@Override
 	public Chunk provideChunk(int x, int z) {
 		System.out.println("Provide Chunk: " + x + "," + z);
-		if(Math.abs(x) > 2 || Math.abs(z) > 2){
-			ChunkPrimer emptyPrimer = new ChunkPrimer();
-			Chunk chunk = new Chunk(this.worldObj, emptyPrimer, x, z);
-			return chunk;
-		}
 		ChunkPrimer chunkPrimer = new ChunkPrimer();
-		terrainGen.generate(x, z, chunkPrimer);
+		generate(x, z, chunkPrimer);
 		
 		Chunk chunk = new Chunk(this.worldObj, chunkPrimer, x, z);
 		
@@ -73,7 +62,36 @@ public class PocketChunkGenerator implements IChunkGenerator {
 	@Override
 	public void recreateStructures(Chunk chunkIn, int x, int z) {
 		// TODO Auto-generated method stub
-		
 	}
+	
+
+    private void generate(int chunkX, int chunkZ, ChunkPrimer primer) {
+        for(int x = 0; x < 16; x++){
+        	for(int z = 0; z < 16; z++){
+        		if(Math.abs(chunkX) > 2 || Math.abs(chunkZ) > 2){
+        			for(int y = 0; y < 100; y++){
+        				primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());	
+        			}
+        		} else {
+            		if((x == 0 && chunkX == -2) || (x == 15 && chunkX == 2) || (z == 0 && chunkZ == -2) || (z == 15 && chunkZ == 2)) {
+            			for(int y = 50; y < 60; y++){
+            				primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
+            			}
+            		} else {
+            			for(int y = 0; y < 50; y++){
+            				primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
+            			}
+                		primer.setBlockState(x, 50, z, Blocks.BEDROCK.getDefaultState());
+                		primer.setBlockState(x, 51, z, Blocks.STONE.getDefaultState());
+                		primer.setBlockState(x, 60, z, Blocks.BEDROCK.getDefaultState());
+                		for(int y = 60; y < 100; y++){
+                			primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
+                		}
+            		}        			
+        		}
+        	}
+        	
+        }
+    }
 
 }

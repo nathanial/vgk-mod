@@ -1,4 +1,7 @@
-package com.vgk.vgkmod;
+package pocketdimension;
+
+import com.vgk.vgkmod.CustomTeleporter;
+import com.vgk.vgkmod.SubstanceBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PocketDimensionRightClickBlock {
+public class PDRightClickBlock {
 	
 	@SubscribeEvent(priority=EventPriority.LOWEST, receiveCanceled=false)
 	public void sendMessage(PlayerInteractEvent.LeftClickBlock event){
@@ -24,14 +27,14 @@ public class PocketDimensionRightClickBlock {
 		
 		EntityPlayer player = event.getEntityPlayer();
 		MinecraftServer server = event.getWorld().getMinecraftServer();		 
-		if(player.dimension == PocketDimensionWorldProvider.dimensionID){
+		if(player.dimension == PDWorldProvider.dimensionID){
 			WorldServer worldServer = server.worldServerForDimension(0);
 			CustomTeleporter teleporter = new CustomTeleporter(worldServer, 0, 100, 0);
 			worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP) player, 0, teleporter);
 		} else {
-			WorldServer worldServer = server.worldServerForDimension(PocketDimensionWorldProvider.dimensionID);
+			WorldServer worldServer = server.worldServerForDimension(PDWorldProvider.dimensionID);
 			CustomTeleporter teleporter = new CustomTeleporter(worldServer, 0, 52, 0);
-			worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP) player, PocketDimensionWorldProvider.dimensionID, teleporter);			
+			worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP) player, PDWorldProvider.dimensionID, teleporter);			
 		}
 	}
 	
