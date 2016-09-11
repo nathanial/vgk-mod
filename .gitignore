@@ -8,3 +8,6 @@ build/
 run/
 vgk-mod_Client.launch
 vgk-mod_Server.launch
+.idea/
+vgk-mod.iml
+.cache-main

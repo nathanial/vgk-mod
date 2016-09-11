@@ -1,4 +1,4 @@
-package pocketdimension;
+package com.vgk.vgkmod.pocketdimension;
 
 import com.vgk.vgkmod.CustomTeleporter;
 import com.vgk.vgkmod.SubstanceBlock;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class PDRightClickBlock {
-	
+
 	@SubscribeEvent(priority=EventPriority.LOWEST, receiveCanceled=false)
 	public void sendMessage(PlayerInteractEvent.LeftClickBlock event){
 		if(event.getSide() != Side.SERVER){
@@ -24,9 +24,9 @@ public class PDRightClickBlock {
 		if(!(block instanceof SubstanceBlock)){
 			return;
 		}
-		
+
 		EntityPlayer player = event.getEntityPlayer();
-		MinecraftServer server = event.getWorld().getMinecraftServer();		 
+		MinecraftServer server = event.getWorld().getMinecraftServer();
 		if(player.dimension == PDWorldProvider.dimensionID){
 			WorldServer worldServer = server.worldServerForDimension(0);
 			CustomTeleporter teleporter = new CustomTeleporter(worldServer, 0, 100, 0);

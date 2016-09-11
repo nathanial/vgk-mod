@@ -1,4 +1,4 @@
-package pocketdimension;
+package com.vgk.vgkmod.pocketdimension;
 
 import javax.annotation.Nonnull;
 

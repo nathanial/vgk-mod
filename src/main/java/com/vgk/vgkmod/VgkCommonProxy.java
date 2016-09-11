@@ -3,9 +3,8 @@ package com.vgk.vgkmod;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import pocketdimension.PDWorldProvider;
+import com.vgk.vgkmod.pocketdimension.PDWorldProvider;
 
 public abstract class VgkCommonProxy {
     
