@@ -16,13 +16,13 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 
-public class FireChunkGenerator implements IChunkGenerator {
+public class PocketChunkGenerator implements IChunkGenerator {
 	
 	private final World worldObj;
 	private final Random random;
-	private final FireTerrainGenerator terrainGen = new FireTerrainGenerator();
+	private final PocketTerrainGenerator terrainGen = new PocketTerrainGenerator();
 	
-	public FireChunkGenerator(World worldObj) {
+	public PocketChunkGenerator(World worldObj) {
 		this.worldObj = worldObj;
 		long seed = 0x1fff;
 		this.random = new Random((seed + 314) * 516);
@@ -31,6 +31,12 @@ public class FireChunkGenerator implements IChunkGenerator {
 
 	@Override
 	public Chunk provideChunk(int x, int z) {
+		System.out.println("Provide Chunk: " + x + "," + z);
+		if(Math.abs(x) > 2 || Math.abs(z) > 2){
+			ChunkPrimer emptyPrimer = new ChunkPrimer();
+			Chunk chunk = new Chunk(this.worldObj, emptyPrimer, x, z);
+			return chunk;
+		}
 		ChunkPrimer chunkPrimer = new ChunkPrimer();
 		terrainGen.generate(x, z, chunkPrimer);
 		

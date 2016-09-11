@@ -24,7 +24,6 @@ public abstract class VgkCommonProxy {
         itemSubstanceBlock = new ItemBlock(substanceBlock);
         itemSubstanceBlock.setRegistryName(substanceBlock.getRegistryName());
         GameRegistry.register(itemSubstanceBlock);        	
-        MinecraftForge.EVENT_BUS.register(new BlockBreakMessage());
         
         loadDimension();
 	}

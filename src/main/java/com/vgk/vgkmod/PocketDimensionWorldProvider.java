@@ -2,6 +2,7 @@ package com.vgk.vgkmod;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -17,7 +18,7 @@ public class PocketDimensionWorldProvider extends WorldProvider {
 	
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new FireChunkGenerator(worldObj);
+		return new PocketChunkGenerator(worldObj);
 	}
 	
     @Override
@@ -28,6 +29,16 @@ public class PocketDimensionWorldProvider extends WorldProvider {
 
     @Override
     public float calculateCelestialAngle(long worldTime, float partialTicks) {
-        return 0.73F;
+        return 1.0f;
     }
+    
+    @Override
+    public void calculateInitialWeather() {
+    	// TODO Auto-generated method stub
+    	this.worldObj.weatherEffects.clear();
+//    	this.worldObj.setThunderStrength(2.0f);
+//    	this.worldObj.setRainStrength(10.0f);
+    	this.worldObj.updateWeatherBody();
+    }
+
 }
