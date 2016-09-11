@@ -71,8 +71,15 @@ public class PocketTerrainGenerator {
     public void generate(int chunkX, int chunkZ, ChunkPrimer primer) {
         for(int x = 0; x < 16; x++){
         	for(int z = 0; z < 16; z++){
-        		primer.setBlockState(x, 50, z, Blocks.BEDROCK.getDefaultState());
-        		primer.setBlockState(x, 51, z, Blocks.WATER.getDefaultState());
+        		if((x == 0 && chunkX == -2) || (x == 15 && chunkX == 2) || (z == 0 && chunkZ == -2) || (z == 15 && chunkZ == 2)) {
+        			for(int y = 50; y < 60; y++){
+        				primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
+        			}
+        		} else {
+            		primer.setBlockState(x, 50, z, Blocks.BEDROCK.getDefaultState());
+            		primer.setBlockState(x, 51, z, Blocks.STONE_SLAB.getDefaultState());
+            		primer.setBlockState(x, 60, z, Blocks.BEDROCK.getDefaultState());
+        		}
         	}
         	
         }

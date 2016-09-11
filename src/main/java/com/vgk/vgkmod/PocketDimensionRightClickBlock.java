@@ -1,5 +1,6 @@
 package com.vgk.vgkmod;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -12,39 +13,24 @@ import net.minecraftforge.fml.relauncher.Side;
 public class PocketDimensionRightClickBlock {
 	
 	@SubscribeEvent(priority=EventPriority.LOWEST, receiveCanceled=false)
-	public void sendMessage(PlayerInteractEvent.RightClickBlock event){
+	public void sendMessage(PlayerInteractEvent.LeftClickBlock event){
 		if(event.getSide() != Side.SERVER){
 			return;
 		}
-		if(event.getItemStack() != null){
+		Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
+		if(!(block instanceof SubstanceBlock)){
 			return;
 		}
 		
 		EntityPlayer player = event.getEntityPlayer();
-		MinecraftServer server = event.getWorld().getMinecraftServer();
-		System.out.println("Event: " + event.getSide());
-		System.out.println("Player Type: " + player.getClass());
-		System.out.println("Server: " + server);
-		String blockState = event.getWorld().getBlockState(event.getPos()).toString();
-		System.out.println("Entity: " + event.getEntity() + "," + event.getItemStack() + "," + blockState);
-		//System.out.println("Result: " + event.getUseBlock());
-		System.out.println("Entity Living: " + event.getEntityLiving());
-		System.out.println("Item STack: " + event.getItemStack());
-		System.out.println("Use ITem: " + event.getUseItem());
-		System.out.println("Use Block: " + event.getUseBlock());
-		System.out.println("Canceled: " + event.isCanceled());
-		System.out.println("Block State: " + blockState);		
-		System.out.println("");
-		
-		
-		 
+		MinecraftServer server = event.getWorld().getMinecraftServer();		 
 		if(player.dimension == PocketDimensionWorldProvider.dimensionID){
 			WorldServer worldServer = server.worldServerForDimension(0);
-			CustomTeleporter teleporter = new CustomTeleporter(worldServer, player.posX, player.posY, player.posZ);
+			CustomTeleporter teleporter = new CustomTeleporter(worldServer, 0, 100, 0);
 			worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP) player, 0, teleporter);
 		} else {
 			WorldServer worldServer = server.worldServerForDimension(PocketDimensionWorldProvider.dimensionID);
-			CustomTeleporter teleporter = new CustomTeleporter(worldServer, player.posX, player.posY + 100, player.posZ);
+			CustomTeleporter teleporter = new CustomTeleporter(worldServer, 0, 52, 0);
 			worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP) player, PocketDimensionWorldProvider.dimensionID, teleporter);			
 		}
 	}

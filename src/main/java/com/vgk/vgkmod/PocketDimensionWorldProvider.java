@@ -2,7 +2,6 @@ package com.vgk.vgkmod;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -34,11 +33,17 @@ public class PocketDimensionWorldProvider extends WorldProvider {
     
     @Override
     public void calculateInitialWeather() {
-    	// TODO Auto-generated method stub
     	this.worldObj.weatherEffects.clear();
-//    	this.worldObj.setThunderStrength(2.0f);
-//    	this.worldObj.setRainStrength(10.0f);
     	this.worldObj.updateWeatherBody();
+    }
+    
+    @Override
+    protected void generateLightBrightnessTable() {
+		float f = 0.3f;
+		for(int i = 0; i <= 15; ++i) {
+			float f1 = 1.0F - (float) i / 15.0F;
+			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+		}
     }
 
 }

@@ -13,9 +13,9 @@ public class CustomTeleporter extends Teleporter {
     @SuppressWarnings("all")
     public CustomTeleporter(WorldServer world, double x, double y, double z) {
         super(world);
-        this.x = 0;
+        this.x = x;
         this.y = y;
-        this.z = 0;
+        this.z = x;
     }
     
 
